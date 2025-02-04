@@ -1,0 +1,13 @@
+# ninja log v6
+14	362	7600241941115692	CMakeFiles/race.dir/DistanceLength.cpp.obj	9dbdffabe80640cd
+31	386	7600241941285728	CMakeFiles/race.dir/TS_all.cpp.obj	d56facbc454e4d97
+25	388	7600241941225715	CMakeFiles/race.dir/TS_air.cpp.obj	34793cee12e09d03
+20	390	7600241941175705	CMakeFiles/race.dir/TS_ground.cpp.obj	89768f78d3b311f9
+5	615	7600241941025675	CMakeFiles/race.dir/main.cpp.obj	7251716e9c13a5e5
+615	898	7600241947117037	race.exe	b8045e638d6c503b
+12	368	7603663476625541	CMakeFiles/race.dir/src/DistanceLength.cpp.obj	21f40b3e796e96c7
+18	372	7603663476675552	CMakeFiles/race.dir/src/TS_ground.cpp.obj	afedb1d221cbf89d
+24	374	7603663476735567	CMakeFiles/race.dir/src/TS_air.cpp.obj	dc2ff39d1ab68a20
+29	393	7603663476795584	CMakeFiles/race.dir/src/TS_all.cpp.obj	9abe044016d82b6d
+3	604	7603663476535521	CMakeFiles/race.dir/src/main.cpp.obj	9e13ca505917d647
+604	891	7603663482546871	race.exe	f39d7254bcc6a519
