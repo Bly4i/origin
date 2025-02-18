@@ -16,5 +16,5 @@ public:
     int runCamel();
     int runCentaur();
     int runFastCamel();
-
+    void displayRegisteredTransports();
 };

@@ -15,4 +15,5 @@ public:
     int registerCarpetPlane();
     int registerEagle();
     int registerBroom();
+    void displayRegisteredTransports();
 };

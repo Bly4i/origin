@@ -1,5 +1,6 @@
 #include "TS_air.h"
 #include<iostream>
+#include <cstdlib>
 
 void TS_air::tsair()
 {
@@ -7,24 +8,41 @@ void TS_air::tsair()
         distancelength();
         cout << "Гонка для воздушного транспорта. Расстояние: " << value << endl;
         registeredTransportCount = 0;
+
         while (true) {
-            cout << "Зарегистрируйте транспорт\n1. Ковёр-самолёт\n2. Орёл\n3. Метла\n4. Вывести результаты гонки\n0. для выхода: " << endl;
+            cout << "Зарегистрируйте транспорт\n1. Ковёр-самолёт\n2. Орёл\n3. Метла\n4. Вывести результаты гонки\n5. Вывести список зарегистрированных ТС.\n0. для выхода: " << endl; 
             cin >> choice;
+
             switch (choice) {
             case 1:
-                totalTime[registeredTransportCount] = registerCarpetPlane();
-                transportNames[registeredTransportCount] = "Ковёр-самолёт";
-                registeredTransportCount++;
+                if (registeredTransportCount < 3) {
+                    totalTime[registeredTransportCount] = registerCarpetPlane();
+                    transportNames[registeredTransportCount] = "Ковёр-самолёт";
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
             case 2:
-                totalTime[registeredTransportCount] = registerEagle();
-                transportNames[registeredTransportCount] = "Орёл";
-                registeredTransportCount++;
+                if (registeredTransportCount < 3) {
+                    totalTime[registeredTransportCount] = registerEagle();
+                    transportNames[registeredTransportCount] = "Орёл";
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
             case 3:
-                totalTime[registeredTransportCount] = registerBroom();
-                transportNames[registeredTransportCount] = "Метла";
-                registeredTransportCount++;
+                if (registeredTransportCount < 3) {
+                    totalTime[registeredTransportCount] = registerBroom();
+                    transportNames[registeredTransportCount] = "Метла";
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
             case 4:
                 if (registeredTransportCount < 2) {
@@ -39,8 +57,11 @@ void TS_air::tsair()
                     break;
                 }
                 break;
+            case 5:
+                displayRegisteredTransports();
+                break;
             case 0:
-                return;
+                exit(0);
             default:
                 cout << "Неверный ввод. Пожалуйста, введите номер транспортного средства." << endl;
                 break;
@@ -52,11 +73,13 @@ void TS_air::tsair()
 
         cout << "Хотите провести еще одну гонку? 1 - Да, 0 - Выйти: ";
         cin >> choice;
-        if (choice != 1) {
-            break;
+        if (choice == 0) {
+            exit(0); 
         }
+
     } while (true);
 }
+
 void TS_air::sortResults()
 {
     for (int i = 0; i < registeredTransportCount - 1; i++) {
@@ -90,4 +113,17 @@ int TS_air::registerBroom() {
     double reductionFactor = 1 - (value / 1000) * 0.01;
     double adjustedDistance = value * reductionFactor;
     return static_cast<int>(adjustedDistance / 20);
+}
+
+
+void TS_air::displayRegisteredTransports() {
+    if (registeredTransportCount == 0) {
+        cout << "Нет зарегистрированных транспортных средств." << endl;
+        return;
+    }
+
+    cout << "Зарегистрированные транспортные средства:" << endl;
+    for (int i = 0; i < registeredTransportCount; i++) {
+        cout << i + 1 << ". " << transportNames[i] << endl;
+    }
 }

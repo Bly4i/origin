@@ -14,4 +14,5 @@ public:
 
     void tsall();
     void sortResults();
+    void displayRegisteredTransports();
 };

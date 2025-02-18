@@ -1,5 +1,6 @@
 #include "TS_all.h"
 #include <iostream>
+#include <cstdlib>
 
 using namespace std;
 
@@ -19,6 +20,7 @@ void TS_all::tsall()
                 << "6. Орёл\n"
                 << "7. Метла\n"
                 << "8. Вывести результаты гонки\n"
+                << "9.Вывести список зарегистрированных ТС.\n"
                 << "0. для выхода: " << endl;
             cin >> choice;
             switch (choice) {
@@ -58,6 +60,9 @@ void TS_all::tsall()
                 transportNames[registeredTransportCount] = "Метла";
                 registeredTransportCount++;
                 break;
+            case 9:
+                displayRegisteredTransports();
+                break;
             case 8:
                 if (registeredTransportCount < 2) {
                     cout << "Необходимо зарегистрировать как минимум 2 транспортных средства для вывода результатов." << endl;
@@ -72,7 +77,7 @@ void TS_all::tsall()
                 }
                 break;
             case 0:
-                return;
+                exit(0);
             default:
                 cout << "Неверный ввод. Пожалуйста, введите номер транспортного средства." << endl;
                 break;
@@ -84,8 +89,8 @@ void TS_all::tsall()
 
         cout << "Хотите провести еще одну гонку? 1 - Да, 0 - Выйти: ";
         cin >> choice;
-        if (choice != 1) {
-            break;
+        if (choice == 0) {
+            exit(0);
         }
     } while (true);
 }
@@ -98,5 +103,16 @@ void TS_all::sortResults()
                 swap(transportNames[j], transportNames[j + 1]);
             }
         }
+    }
+}
+void TS_all::displayRegisteredTransports() {
+    if (registeredTransportCount == 0) {
+        cout << "Нет зарегистрированных транспортных средств." << endl;
+        return;
+    }
+
+    cout << "Зарегистрированные транспортные средства:" << endl;
+    for (int i = 0; i < registeredTransportCount; i++) {
+        cout << i + 1 << ". " << transportNames[i] << endl;
     }
 }

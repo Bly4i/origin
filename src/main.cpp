@@ -39,7 +39,7 @@ int main()
             break;
         }
         case 0: {
-            return 0;
+            exit(0);
             break;
         }
         default:

@@ -1,5 +1,6 @@
 #include "TS_ground.h"
 #include <iostream>
+#include <cstdlib>
 using namespace std;
 
 void TS_ground::tsground()
@@ -10,7 +11,7 @@ void TS_ground::tsground()
         registeredTransportCount = 0;
 
         while (true) {
-            cout << "Зарегистрируйте транспорт\n1. Ботинки-вездеходы\n2. Верблюд\n3. Кентавр\n4. Верблюд-быстроход\n5. Вывести результаты гонки\n0. для выхода: " << endl;
+            cout << "Зарегистрируйте транспорт\n1. Ботинки-вездеходы\n2. Верблюд\n3. Кентавр\n4. Верблюд-быстроход\n5. Вывести результаты гонки\n6. Вывести список зарегистрированных\n0. для выхода: " << endl;
             cin >> choice;
 
             switch (choice) {
@@ -47,8 +48,11 @@ void TS_ground::tsground()
                     }
                 }
                 break;
+            case 6:
+                displayRegisteredTransports();
+                break;
             case 0:
-                return;
+                exit(0);
             default:
                 cout << "Неверный ввод. Пожалуйста, введите номер транспортного средства." << endl;
                 break;
@@ -61,8 +65,8 @@ void TS_ground::tsground()
 
         cout << "Хотите провести еще одну гонку? 1 - Да, 0 - Выйти: ";
         cin >> choice;
-        if (choice != 1) {
-            break;
+        if (choice == 0) {
+            exit(0);
         }
 
     } while (true);
@@ -130,4 +134,15 @@ int TS_ground::runFastCamel()
     int totalRestTime = firstRestTime + (rests > 1 ? secondRestTime : 0) + (rests - 2) * subsequentRestTime;
     int totalTime = travelTime + totalRestTime;
     return totalTime;
+}
+void TS_ground::displayRegisteredTransports() {
+    if (registeredTransportCount == 0) {
+        cout << "Нет зарегистрированных транспортных средств." << endl;
+        return;
+    }
+
+    cout << "Зарегистрированные транспортные средства:" << endl;
+    for (int i = 0; i < registeredTransportCount; i++) {
+        cout << i + 1 << ". " << transportNames[i] << endl;
+    }
 }
