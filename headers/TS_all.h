@@ -1,18 +1,27 @@
-#pragma once
 
-#include "TS_air.h"
-#include"TS_ground.h"
-#include <string>
+#ifndef TS_ALL_H
+#define TS_ALL_H
 
-class TS_all : public TS_air, TS_ground
-{
-public:
-    int choice = 0;
-    int registeredTransportCount = 0;
-    int totalTime[7];
-    string transportNames[7];
+#include "all_transport.h"
+#include <iostream>
+#include <cstring>
 
-    void tsall();
+class TS_all {
+private:
+    static const int MAX_TRANSPORTS = 7;
+    Transport* transports[MAX_TRANSPORTS];
+    double totalTime[MAX_TRANSPORTS];
+    const char* transportNames[MAX_TRANSPORTS];
+    int registeredTransportCount;
+    int distance;
+
     void sortResults();
     void displayRegisteredTransports();
+
+public:
+    TS_all() : registeredTransportCount(0), distance(0) {}
+
+    void tsair();
 };
+
+#endif // TS_all_H

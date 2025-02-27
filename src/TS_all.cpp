@@ -1,15 +1,15 @@
-#include "TS_all.h"
+#include "ts_all.h"
 #include <iostream>
 #include <cstdlib>
 
-using namespace std;
-
-void TS_all::tsall()
-{
+void TS_all::tsair() {
     do {
-        distancelength();
-        cout << "Гонка для воздушного транспорта. Расстояние: " << value << endl;
+        cout << "Введите расстояние для гонки: ";
+        cin >> distance;
+
+        cout << "Гонка для всех транспортов. Расстояние: " << distance << endl;
         registeredTransportCount = 0;
+
         while (true) {
             cout << "Зарегистрируйте транспорт \n"
                 << "1. Ботинки-вездеходы\n"
@@ -22,47 +22,74 @@ void TS_all::tsall()
                 << "8. Вывести результаты гонки\n"
                 << "9.Вывести список зарегистрированных ТС.\n"
                 << "0. для выхода: " << endl;
+            int choice;
             cin >> choice;
-            switch (choice) {
 
+            switch (choice) {
             case 1:
-                totalTime[registeredTransportCount] = runBoots();
-                transportNames[registeredTransportCount] = "Ботинки-вездеходы";
-                registeredTransportCount++;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new Boots();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
+
             case 2:
-                totalTime[registeredTransportCount] = runCamel();
-                transportNames[registeredTransportCount] = "Верблюд";
-                registeredTransportCount++;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new Camel();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
+
             case 3:
-                totalTime[registeredTransportCount] = runCentaur();
-                transportNames[registeredTransportCount] = "Кентавр";
-                registeredTransportCount++;
-                break;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new Centaur();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
             case 4:
-                totalTime[registeredTransportCount] = runFastCamel();
-                transportNames[registeredTransportCount] = "Верблюд-быстроход";
-                registeredTransportCount++;
-                break;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new FastCamel();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
             case 5:
-                totalTime[registeredTransportCount] = registerCarpetPlane();
-                transportNames[registeredTransportCount] = "Ковёр-самолёт";
-                registeredTransportCount++;
-                break;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new CarpetPlane();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
             case 6:
-                totalTime[registeredTransportCount] = registerEagle();
-                transportNames[registeredTransportCount] = "Орёл";
-                registeredTransportCount++;
-                break;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new Eagle();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
             case 7:
-                totalTime[registeredTransportCount] = registerBroom();
-                transportNames[registeredTransportCount] = "Метла";
-                registeredTransportCount++;
+                if (registeredTransportCount < MAX_TRANSPORTS) {
+                    transports[registeredTransportCount] = new Broom();
+                    totalTime[registeredTransportCount] = transports[registeredTransportCount]->calcTimeRide(distance);
+                    transportNames[registeredTransportCount] = transports[registeredTransportCount]->getName();
+                    registeredTransportCount++;
+                }
+                else {
+                    cout << "Достигнуто максимальное количество зарегистрированных ТС." << endl;
+                }
                 break;
-            case 9:
-                displayRegisteredTransports();
-                break;
+
             case 8:
                 if (registeredTransportCount < 2) {
                     cout << "Необходимо зарегистрировать как минимум 2 транспортных средства для вывода результатов." << endl;
@@ -73,29 +100,37 @@ void TS_all::tsall()
                     for (int i = 0; i < registeredTransportCount; i++) {
                         cout << i + 1 << ". " << transportNames[i] << ": " << totalTime[i] << " часов." << endl;
                     }
-                    break;
                 }
                 break;
+
+            case 9:
+                displayRegisteredTransports();
+                break;
+
             case 0:
                 exit(0);
+
             default:
                 cout << "Неверный ввод. Пожалуйста, введите номер транспортного средства." << endl;
                 break;
             }
+
             if (choice == 8 && registeredTransportCount >= 2) {
                 break;
             }
         }
 
         cout << "Хотите провести еще одну гонку? 1 - Да, 0 - Выйти: ";
+        int choice;
         cin >> choice;
         if (choice == 0) {
             exit(0);
         }
+
     } while (true);
 }
-void TS_all::sortResults()
-{
+
+void TS_all::sortResults() {
     for (int i = 0; i < registeredTransportCount - 1; i++) {
         for (int j = 0; j < registeredTransportCount - i - 1; j++) {
             if (totalTime[j] > totalTime[j + 1]) {
@@ -105,13 +140,9 @@ void TS_all::sortResults()
         }
     }
 }
-void TS_all::displayRegisteredTransports() {
-    if (registeredTransportCount == 0) {
-        cout << "Нет зарегистрированных транспортных средств." << endl;
-        return;
-    }
 
-    cout << "Зарегистрированные транспортные средства:" << endl;
+void TS_all::displayRegisteredTransports() {
+    cout << "Зарегистрированные транспортные средства:\\n";
     for (int i = 0; i < registeredTransportCount; i++) {
         cout << i + 1 << ". " << transportNames[i] << endl;
     }

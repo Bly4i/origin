@@ -1,10 +1,9 @@
 #include <iostream>
 #include <string>
 #include <Windows.h>
-#include "DistanceLength.h"
-#include "TS_ground.h"
-#include "TS_air.h"
-#include "TS_all.h"
+#include "ts_air.h"
+#include"ts_ground.h"
+#include"ts_all.h"
 using namespace std;
 
 
@@ -22,20 +21,18 @@ int main()
         cin >> choice;
         switch (choice) {
         case 1: {
-            TS_ground race;
-            race.tsground();
+            TS_ground groundRace;
+            groundRace.tsair();
             break;
         }
         case 2: {
-            TS_air race;
-            race.tsair();
-            break;
+            TS_air airRace;
+            airRace.tsair();
             break;
         }
         case 3: {
-            TS_all race;
-            race.tsall();
-            break;
+            TS_all allRace;
+            allRace.tsair();
             break;
         }
         case 0: {
